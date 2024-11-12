@@ -20,7 +20,7 @@ module.exports = {
     dialectOptions: {
       ssl: {
         rejectUnauthorized: false,
-        ca: fs.readFileSync(path.resolve(__dirname, "ca.pem")),
+        ca: fs.readFileSync(path.resolve(__dirname, "certs/ca.pem")),
       },
     },
   },
