@@ -1,0 +1,42 @@
+module.exports = (sequelize, DataTypes) => {
+  const MateriaEstudiante = sequelize.define(
+    "MateriaEstudiante",
+    {
+      codEst: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        comment: "Código del Estudiante",
+        primaryKey: true,
+      },
+      codMat: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        comment: "Código de la Materia",
+        primaryKey: true,
+      },
+    },
+    {
+      tableName: "materias_estudiantes",
+      timestamps: true,
+      underscored: false,
+    }
+  );
+
+  MateriaEstudiante.associate = (models) => {
+    MateriaEstudiante.belongsTo(models.Estudiante, {
+      foreignKey: "codEst",
+      targetKey: "codIntEst",
+      onDelete: "CASCADE",
+      as: "estudiantes",
+    });
+
+    MateriaEstudiante.belongsTo(models.Materia, {
+      foreignKey: "codMat",
+      targetKey: "codIntMat",
+      onDelete: "CASCADE",
+      as: "materias",
+    });
+  };
+
+  return MateriaEstudiante;
+};
