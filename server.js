@@ -28,14 +28,14 @@ sequelize
   .then(() => console.log("Database connected"))
   .catch((err) => console.log("Error: " + err));
 
-sequelize
-  .sync({ force: true })
-  .then(() => {
-    console.log("Database synchronized.");
-  })
-  .catch((error) => {
-    console.error("Error syncing database:", error);
-  });
+// sequelize
+//   .sync({ force: true })
+//   .then(() => {
+//     console.log("Database synchronized.");
+//   })
+//   .catch((error) => {
+//     console.error("Error syncing database:", error);
+//   });
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
