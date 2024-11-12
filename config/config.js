@@ -16,7 +16,6 @@ module.exports = {
     dialect: "mysql",
     dialectOptions: {
       ssl: {
-        require: false,
         rejectUnauthorized: false,
       },
     },
