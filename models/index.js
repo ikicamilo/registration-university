@@ -1,7 +1,5 @@
-const { Sequelize, DataTypes, Op } = require("sequelize");
-const config = require("../config/config");
-
-const sequelize = new Sequelize(config.development);
+const { DataTypes, Op } = require("sequelize");
+const sequelize = require("../sequelize");
 
 const Estudiante = require("./estudiante")(sequelize, DataTypes);
 const Profesor = require("./profesor")(sequelize, DataTypes);

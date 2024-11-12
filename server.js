@@ -2,22 +2,21 @@ require("dotenv").config();
 
 const express = require("express");
 const morgan = require("morgan");
-const { Sequelize } = require("sequelize");
+const sequelize = require("./sequelize");
+
 const estudianteRoutes = require("./routes/estudianteRoutes");
 const profesorRoutes = require("./routes/profesorRoutes");
 const materiaRoutes = require("./routes/materiaRoutes");
 const materiaEstudianteRoutes = require("./routes/materiaEstudianteRoutes");
-const config = require("./config/config");
 
 const app = express();
-const sequelize = new Sequelize(
-  process.env.NODE_ENV === "development"
-    ? config.development
-    : config.production
-);
 
 app.use(morgan("dev"));
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 app.use("/api/estudiante", estudianteRoutes);
 app.use("/api/profesor", profesorRoutes);
 app.use("/api/materia", materiaRoutes);
