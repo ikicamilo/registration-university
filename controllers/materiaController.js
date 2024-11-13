@@ -19,3 +19,13 @@ exports.getAllMateriasWithProfesor = async (req, res) => {
     res.status(500).json({ message: "Server Error" });
   }
 };
+
+exports.getAllEstudiantesByMaterias = async (req, res) => {
+  try {
+    const materias = await materiaService.getAllEstudiantesByMaterias();
+    res.json(materias);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};

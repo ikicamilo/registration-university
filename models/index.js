@@ -14,7 +14,11 @@ Estudiante.hasMany(MateriaEstudiante, {
   foreignKey: "codEst",
   as: "materias_estudiantes",
 });
-MateriaEstudiante.belongsTo(Estudiante, { foreignKey: "codEst" });
+
+MateriaEstudiante.belongsTo(Estudiante, {
+  foreignKey: "codEst",
+  as: "estudiantes",
+});
 
 Materia.hasMany(MateriaEstudiante, {
   foreignKey: "codMat",
