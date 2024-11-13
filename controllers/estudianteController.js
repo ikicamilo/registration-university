@@ -45,6 +45,33 @@ exports.getEstudiantesByCodEst = async (req, res) => {
   }
 };
 
+exports.updateEstudiante = async (req, res) => {
+  const { codEst } = req.params;
+
+  try {
+    const estudiante = await estudianteService.updateEstudiante(
+      codEst,
+      req.body
+    );
+    return res.json(estudiante);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Error updating estudiante." });
+  }
+};
+
+exports.deleteEstudiante = async (req, res) => {
+  const { codEst } = req.params;
+
+  try {
+    const estudiantes = await estudianteService.deleteEstudiante(codEst);
+    return res.json(estudiantes);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Error fetching estudiantes." });
+  }
+};
+
 exports.callSPInfoEstudiante = async (req, res) => {
   const { codEst } = req.params;
 
@@ -53,6 +80,8 @@ exports.callSPInfoEstudiante = async (req, res) => {
     return res.json(estudiante);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Error fetching estudiante SP." });
+    return res
+      .status(500)
+      .json({ error: `Error fetching estudiante, ${error}` });
   }
 };

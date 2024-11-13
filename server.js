@@ -9,6 +9,8 @@ const profesorRoutes = require("./routes/profesorRoutes");
 const materiaRoutes = require("./routes/materiaRoutes");
 const materiaEstudianteRoutes = require("./routes/materiaEstudianteRoutes");
 
+const { swaggerDocs: V1SwaggerDocs } = require("./v1/swagger");
+
 const app = express();
 
 app.use(morgan("dev"));
@@ -29,4 +31,5 @@ sequelize
 
 app.listen(process.env.PORT || 3000, () => {
   console.log(`Server is running on port ${process.env.PORT}`);
+  V1SwaggerDocs(app, process.env.PORT);
 });

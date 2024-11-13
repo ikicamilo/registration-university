@@ -1,3 +1,27 @@
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     MateriaEstudiante:
+ *       type: object
+ *       properties:
+ *         codEst:
+ *           type: integer
+ *           description: "Código del estudiante (Lláve foránea de Estudiantes)"
+ *         codMat:
+ *           type: integer
+ *           description: "Código de la Materia (Lláve foránea de Materias)"
+ *         createdAt:
+ *           type: timestamp
+ *           readOnly: true
+ *           example: 2024-11-12T03:19:49.000Z
+ *           description: "Fecha de creación de MateriaEstudiante"
+ *         updatedAt:
+ *           type: timestamp
+ *           readOnly: true
+ *           example: 2024-11-12T03:19:49.000Z
+ *           description: "Fecha de actualización del MateriaEstudiante"
+ */
 module.exports = (sequelize, DataTypes) => {
   const MateriaEstudiante = sequelize.define(
     "MateriaEstudiante",

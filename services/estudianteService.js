@@ -33,6 +33,51 @@ exports.createEstudiante = async (data) => {
   return newEstudiante;
 };
 
+exports.updateEstudiante = async (codIntEst, data) => {
+  const { nomEst, apelEst, emailEst, preCreEst } = data;
+
+  const existingEstudiante = await Estudiante.findOne({
+    where: { codIntEst },
+  });
+
+  if (!existingEstudiante) {
+    throw new Error("El estudiante no existe");
+  }
+
+  if (existingEstudiante.emailEst !== emailEst) {
+    const emailExists = await Estudiante.findOne({
+      where: { emailEst },
+    });
+
+    if (emailExists) {
+      throw new Error("Un estudiante ya existe con ese email");
+    }
+  }
+
+  existingEstudiante.nomEst = nomEst || existingEstudiante.nomEst;
+  existingEstudiante.apelEst = apelEst || existingEstudiante.apelEst;
+  existingEstudiante.emailEst = emailEst || existingEstudiante.emailEst;
+  existingEstudiante.preCreEst = preCreEst || existingEstudiante.preCreEst;
+
+  await existingEstudiante.save();
+
+  return existingEstudiante;
+};
+
+exports.deleteEstudiante = async (codIntEst) => {
+  const estudiante = await Estudiante.findOne({
+    where: { codIntEst },
+  });
+
+  if (!estudiante) {
+    throw new Error("El estudiante no existe");
+  }
+
+  await estudiante.destroy();
+
+  return { message: "Estudiante eliminado correctamente" };
+};
+
 exports.getEstudiantesByCodEst = async (codEst) => {
   try {
     const estudiantes = await Estudiante.findAll({
