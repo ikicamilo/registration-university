@@ -26,6 +26,8 @@ app.use("/api/profesor", profesorRoutes);
 app.use("/api/materia", materiaRoutes);
 app.use("/api/materia_estudiante", materiaEstudianteRoutes);
 
+V1SwaggerDocs(app, process.env.PORT);
+
 app.use((req, res, next) => {
   res.status(404).json({
     error: "Not Found",
