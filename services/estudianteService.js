@@ -125,9 +125,15 @@ exports.callSPInfoEstudiante = async (codIntEst) => {
       throw new Error("Estudiante no encontrado");
     }
 
-    const exchangeRates = await axios.get(
-      "https://api.frankfurter.app/latest?to=USD,EUR"
-    );
+    let exchangeRates;
+    try {
+      exchangeRates = await axios.get(
+        "https://api.frankfurter.app/latest?to=USD,EUR"
+      );
+    } catch (apiError) {
+      console.error("Error fetching exchange rates:", apiError);
+      throw new Error("Error fetching exchange rates");
+    }
 
     const precioCredEuros = exchangeRates.data.rates.USD * estudiante.preTotEst;
 
@@ -148,7 +154,7 @@ exports.callSPInfoEstudiante = async (codIntEst) => {
 
     return estudiantePlain;
   } catch (error) {
-    console.error("Error executing stored procedure:", error);
+    console.error("Error ejecutando SP:", error);
     throw error;
   }
 };
